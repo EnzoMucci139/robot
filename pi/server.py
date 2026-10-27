@@ -60,7 +60,7 @@ try:
         # Check heartbeat
         elapsed = time.monotonic() - last_heartbeat
 
-        if elapsed > 0.5:
+        if elapsed > 1:
             print("Heartbeat lost")
             break
 
