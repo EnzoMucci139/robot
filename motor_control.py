@@ -16,15 +16,14 @@ right_direction = board.get_pin("d:7:o")
 left_speed.write(0)
 right_speed.write(0)
 
-# We'll add motor control here
 def stop():
-    left_speed.write(0)
+    left_speed.write(0)         #function to stop
     right_speed.write(0)
 
 
 def forward():
     left_direction.write(1)
-    right_direction.write(0)
+    right_direction.write(0)            #function to go forwards etc...
     left_speed.write(1)
     right_speed.write(1)
 
@@ -63,7 +62,7 @@ try:
     forward()
     time.sleep(1)
     backward()
-    time.sleep(1)
+    time.sleep(1)               #test each function
     right()
     time.sleep(3)
     left()
