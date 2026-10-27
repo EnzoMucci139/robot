@@ -1,4 +1,8 @@
 import pygame
+import socket
+
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(("192.168.1.241", 5000))
 
 running = True
 pygame.init()
@@ -6,6 +10,7 @@ pygame.display.set_mode((400, 300))
 clock = pygame.time.Clock()
 
 previous_action = None
+
 
 while running:
 
@@ -46,8 +51,12 @@ while running:
 
     if action != previous_action:
         print(action)
+        message = action + "\n"
+        message = message.encode()
+        client.sendall(message)
         previous_action = action
 
     clock.tick(20)
 
 pygame.quit()
+client.close()
