@@ -45,17 +45,30 @@ def right():
     left_speed.write(1)
     right_speed.write(1)
 
-def left_forward():
+def forward_left():
     left_direction.write(1)
+    right_direction.write(0)
+    left_speed.write(0.5)
+    right_speed.write(1)
+
+def forward_right():
+    left_direction.write(1)
+    right_direction.write(0)
+    left_speed.write(1)
+    right_speed.write(0.5)
+
+def backward_left():
+    left_direction.write(0)
     right_direction.write(1)
     left_speed.write(0.7)
     right_speed.write(1)
 
-def right_forward():
+def backward_right():
     left_direction.write(0)
-    right_direction.write(0)
+    right_direction.write(1)
     left_speed.write(1)
     right_speed.write(0.7)
+
 
 
 try:
