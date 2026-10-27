@@ -1,0 +1,75 @@
+
+const int LEFT_DIR = 4;
+const int LEFT_PWM = 5;
+const int RIGHT_PWM = 6;
+const int RIGHT_DIR = 7;
+
+const unsigned long TIMEOUT_MS = 500;
+unsigned long lastCommand = 0;
+
+void stopMotors() {
+    analogWrite(LEFT_PWM, 0);
+    analogWrite(RIGHT_PWM, 0);
+}
+
+// Positive speed = forwards
+// Negative speed = backwards
+void drive(int left, int right) {
+    // Disable motor outputs before changing directions
+    analogWrite(LEFT_PWM, 0);
+    analogWrite(RIGHT_PWM, 0);
+
+    // Directions verified on your robot
+    digitalWrite(LEFT_DIR, left >= 0 ? HIGH : LOW);
+    digitalWrite(RIGHT_DIR, right >= 0 ? LOW : HIGH);
+
+    analogWrite(LEFT_PWM, abs(left));
+    analogWrite(RIGHT_PWM, abs(right));
+}
+
+void setup() {
+    pinMode(LEFT_DIR, OUTPUT);
+    pinMode(LEFT_PWM, OUTPUT);
+    pinMode(RIGHT_DIR, OUTPUT);
+    pinMode(RIGHT_PWM, OUTPUT);
+
+    stopMotors();
+
+    Serial.begin(9600);
+    lastCommand = millis();
+}
+
+void loop() {
+    while (Serial.available() > 0) {
+        char command = Serial.read();
+        bool valid = true;
+
+        switch (command) {
+            case 'F': drive(170, 170); break;
+            case 'B': drive(-170, -170); break;
+            case 'L': drive(-150, 150); break;
+            case 'R': drive(150, -150); break;
+
+            case 'G': drive(100, 170); break;
+            case 'H': drive(170, 100); break;
+            case 'J': drive(-170, -100); break;
+            case 'K': drive(-100, -170); break;
+
+            case 'X': stopMotors(); break;
+
+            default:
+                stopMotors();
+                valid = false;
+                break;
+        }
+
+        if (valid) {
+            lastCommand = millis();
+        }
+    }
+
+    // Stop if communication stops
+    if (millis() - lastCommand > TIMEOUT_MS) {
+        stopMotors();
+    }
+}
