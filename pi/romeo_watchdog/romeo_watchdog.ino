@@ -45,23 +45,28 @@ void loop() {
         bool valid = true;
 
         switch (command) {
-            case 'F': drive(170, 170); break;
-            case 'B': drive(-170, -170); break;
-            case 'L': drive(-150, 150); break;
-            case 'R': drive(150, -150); break;
+    case 'F': drive(170, 170); break;
+    case 'B': drive(-170, -170); break;
 
-            case 'G': drive(100, 170); break;
-            case 'H': drive(170, 100); break;
-            case 'J': drive(-170, -100); break;
-            case 'K': drive(-100, -170); break;
+    // Turn on the spot
+    case 'L': drive(170, -170); break;
+    case 'R': drive(-170, 170); break;
 
-            case 'X': stopMotors(); break;
+    // Steer while moving forwards
+    case 'G': drive(190, 130); break;
+    case 'H': drive(130, 190); break;
 
-            default:
-                stopMotors();
-                valid = false;
-                break;
-        }
+    // Steer while moving backwards
+    case 'J': drive(-130, -190); break;
+    case 'K': drive(-190, -130); break;
+
+    case 'X': stopMotors(); break;
+
+    default:
+        stopMotors();
+        valid = false;
+        break;
+}
 
         if (valid) {
             lastCommand = millis();
