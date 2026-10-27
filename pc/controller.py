@@ -19,6 +19,7 @@ while running:
             running = False
 
     if not running:
+        client.sendall(b"Stop\ns")
         break
 
 
@@ -49,12 +50,13 @@ while running:
     else:
         action = "Stop"
 
+
     if action != previous_action:
         print(action)
-        message = action + "\n"
-        message = message.encode()
-        client.sendall(message)
         previous_action = action
+
+    message = (action + "\n").encode()
+    client.sendall(message)
 
     clock.tick(20)
 
