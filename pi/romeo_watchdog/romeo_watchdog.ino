@@ -45,8 +45,8 @@ void loop() {
         bool valid = true;
 
         switch (command) {
-    case 'F': drive(200, 170); break;
-    case 'B': drive(-170, -200); break;
+    case 'F': drive(195, 170); break;
+    case 'B': drive(-160, -200); break;
 
     // Turn on the spot
     case 'L': drive(200, -200); break;
