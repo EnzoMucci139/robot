@@ -60,8 +60,8 @@ try:
         # Check heartbeat
         elapsed = time.monotonic() - last_heartbeat
 
-        if elapsed > 1:
-            print("Heartbeat lost")
+        if elapsed > 1.5:
+            print(f"Heartbeat lost after {elapsed:.2f} seconds")
             break
 
         # Process received data
@@ -75,17 +75,13 @@ try:
             first = first.strip()
 
             if first in commands:
-
-                # Update heartbeat
                 last_heartbeat = time.monotonic()
 
-                # Send command to Romeo
-                romeo.write(commands[first])
-
-                # Only print when action changes
                 if first != previous_action:
-                    print(first)
+                    print(f"Network received: {first}", flush=True)
                     previous_action = first
+
+                romeo.write(commands[first])
 
 # Always attempt to stop motors and close connections
 finally:
