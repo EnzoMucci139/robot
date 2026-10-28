@@ -45,8 +45,8 @@ void loop() {
         bool valid = true;
 
         switch (command) {
-    case 'F': drive(190, 170); break;
-    case 'B': drive(-190, -170); break;
+    case 'F': drive(200, 170); break;
+    case 'B': drive(-160, -170); break;
 
     // Turn on the spot
     case 'L': drive(200, -200); break;
@@ -57,8 +57,8 @@ void loop() {
     case 'H': drive(80, 200); break;
 
     // Steer while moving backwards
-    case 'J': drive(-80, -200); break;
-    case 'K': drive(-200, -80); break;
+    case 'J': drive(-200, -80); break;
+    case 'K': drive(-80, -200); break;
 
     case 'X': stopMotors(); break;
 
