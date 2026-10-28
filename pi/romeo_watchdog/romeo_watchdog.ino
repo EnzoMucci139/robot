@@ -46,19 +46,19 @@ void loop() {
 
         switch (command) {
     case 'F': drive(195, 170); break;
-    case 'B': drive(-160, -200); break;
+    case 'B': drive(-155, -205); break;
 
     // Turn on the spot
     case 'L': drive(200, -200); break;
     case 'R': drive(-200, 200); break;
 
     // Steer while moving forwards
-    case 'G': drive(200, 80); break;
-    case 'H': drive(80, 200); break;
+    case 'G': drive(220, 50); break;
+    case 'H': drive(50, 220); break;
 
     // Steer while moving backwards
-    case 'J': drive(-200, -80); break;
-    case 'K': drive(-80, -200); break;
+    case 'J': drive(-220, -50); break;
+    case 'K': drive(-50, -220); break;
 
     case 'X': stopMotors(); break;
 
