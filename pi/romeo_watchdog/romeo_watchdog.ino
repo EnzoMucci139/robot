@@ -46,7 +46,7 @@ void loop() {
 
         switch (command) {
     case 'F': drive(200, 170); break;
-    case 'B': drive(-160, -170); break;
+    case 'B': drive(-170, -200); break;
 
     // Turn on the spot
     case 'L': drive(200, -200); break;
